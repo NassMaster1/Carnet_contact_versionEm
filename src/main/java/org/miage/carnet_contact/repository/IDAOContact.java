@@ -27,4 +27,8 @@ public interface IDAOContact {
      void deleteContact(Long id );
 
      void UpdateContact(Long id, Contact contactModify);
+
+      void saveContactBrut( Contact detailContact);
+
+
 }

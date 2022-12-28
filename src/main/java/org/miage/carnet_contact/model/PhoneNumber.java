@@ -2,16 +2,14 @@ package org.miage.carnet_contact.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
-@RequiredArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "PhoneNumber")
 
@@ -38,7 +36,7 @@ public class PhoneNumber {
     //PhoneNum
 
     @JsonIgnore
-    @ManyToOne(cascade=CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name="id_contact")
     private Contact contact;
 

@@ -12,9 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DetailContactGroupMapper {
 
-
     private ContactMapper contactMapper;
-
 
     public ContactGroup mapToDetailConatctGroup(DetailContactGroupDTO detailGroup){
         List<ContactDTO> contactDTOS =detailGroup.contactDTOS();

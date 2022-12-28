@@ -8,6 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CarnetContactApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CarnetContactApplication.class, args);
+         SpringApplication.run(CarnetContactApplication.class, args);
     }
 }

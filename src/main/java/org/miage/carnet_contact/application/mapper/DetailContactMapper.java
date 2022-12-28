@@ -1,10 +1,12 @@
 package org.miage.carnet_contact.application.mapper;
 
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.miage.carnet_contact.application.dto.DetailContactDTO;
 import org.miage.carnet_contact.model.Contact;
 import org.springframework.stereotype.Component;
+
 
 @Component
 @RequiredArgsConstructor
@@ -13,6 +15,7 @@ public class DetailContactMapper {
 
 
     private final ContactMapper contactMapper;
+
 
     public Contact mapToDetailContact(DetailContactDTO detailContactDTO){
         Contact contact =new  Contact(

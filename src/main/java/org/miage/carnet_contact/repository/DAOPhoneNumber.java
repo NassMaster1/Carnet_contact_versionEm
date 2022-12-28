@@ -16,6 +16,13 @@ import java.util.List;
 @Repository
 public class DAOPhoneNumber implements IDAOPhoneNumber{
 
+    /**
+     * Ajouter un numéro pour un utilisateur
+
+     * @param id phoneNumber
+     * @return
+     */
+
     @Override
     public void addPhoneNumberToContact(Long id, PhoneNumber phoneNumber) {
 
@@ -50,6 +57,13 @@ public class DAOPhoneNumber implements IDAOPhoneNumber{
         em.close();
 
     }
+
+    /**
+     * Supprimer un numéro pour un utilisateur
+
+     * @param id phoneNumber
+     * @return
+     */
 
     @Override
     public void DeletePhoneNumberToContact(Long id, Long id_phoneNumber) {

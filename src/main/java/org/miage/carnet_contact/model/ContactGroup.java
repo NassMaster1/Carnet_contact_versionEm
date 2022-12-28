@@ -1,8 +1,7 @@
 package org.miage.carnet_contact.model;
 
 
-
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -13,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@RequiredArgsConstructor
+@NoArgsConstructor
+@NamedQuery(name="ContactGroup.findGroupByNameGroup", query="SELECT c FROM ContactGroup c WHERE c.name_group=:namegroup")
 @Entity
-@Table(name = "ContactGroup")
+@Table(name = "contactGroup")
 @Slf4j
 public class ContactGroup {
 
@@ -30,11 +30,11 @@ public class ContactGroup {
     @Column(name = "name_group")
     private String name_group;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinTable(
             name = "join_contact_group",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "id_contact")
+            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "id_contact", referencedColumnName = "id_contact ")
     )
     private List<Contact> contacts = new ArrayList<>();
 

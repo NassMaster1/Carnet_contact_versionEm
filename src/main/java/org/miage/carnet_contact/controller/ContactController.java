@@ -1,10 +1,14 @@
 package org.miage.carnet_contact.controller;
 
 
-import org.miage.carnet_contact.application.ContactService;
 import org.miage.carnet_contact.application.dto.ContactDTO;
 import org.miage.carnet_contact.application.dto.DetailContactDTO;
+import org.miage.carnet_contact.application.service.IContactService;
+import org.miage.carnet_contact.model.Contact;
 import org.miage.carnet_contact.util.CostumeResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +22,28 @@ import static org.springframework.http.HttpStatus.CREATED;
 @CrossOrigin("*")
 @RestController
 @RequestMapping(value = "api/v1/contact", produces = MediaType.APPLICATION_JSON_VALUE)
-public record ContactController(ContactService contactService) {
+public class ContactController {
+
+    ApplicationContext context =  new ClassPathXmlApplicationContext("applicationContext.xml");
 
 
+    @Autowired
+    private IContactService contactService;
 
     @PostMapping("")
     public ResponseEntity<CostumeResponse<String>> save(@RequestBody @Valid DetailContactDTO contact) {
 
         contactService.saveContact(contact);
+        return new ResponseEntity<>(new CostumeResponse<>(format("contact %s created", contact)), CREATED);
+    }
+
+    @PostMapping("/brut")
+    public ResponseEntity<CostumeResponse<String>> saveBrut() {
+
+         Contact contact = (Contact) context.getBean("idContact");
+
+        contactService.saveContactBrut(contact);
+
         return new ResponseEntity<>(new CostumeResponse<>(format("contact %s created", contact)), CREATED);
     }
 

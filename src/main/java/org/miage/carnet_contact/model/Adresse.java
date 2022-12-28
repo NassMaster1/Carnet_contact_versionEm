@@ -41,17 +41,10 @@ public class Adresse {
     @OneToOne(mappedBy="adresse")
     private Contact contact;
 
-
-    public Adresse(String street, String city, String zip, String country) {
-        Street = street;
-        City = city;
-        this.zip = zip;
-        Country = country;
-    }
-
     public Adresse() {
 
     }
+
 
 
     public long getId() {

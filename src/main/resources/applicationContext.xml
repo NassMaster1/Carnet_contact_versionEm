@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+
+    <bean id="idContact" class="org.miage.carnet_contact.model.Contact">
+        <property name="firstName" value="Nacer"/>
+        <property name="lastName" value="Ait Maamar"/>
+        <property name="email" value="41012118@parisnanterre.fr"/>
+        <property name="adresse"  ref="idAdresse"/>
+        <property name="phoneNumber">
+            <util:set>
+                <ref bean="idphone1"/>
+                <ref bean="idphone2"/>
+            </util:set>
+        </property>
+
+    </bean>
+
+    <bean id="idAdresse" class="org.miage.carnet_contact.model.Adresse">
+        <property name="street" value="rue volta"/>
+        <property name="city" value="Nanterre"/>
+        <property name="country" value="France"/>
+        <property name="zip" value="92000"/>
+        <property name="contact" ref="idContact"/>
+    </bean>
+
+    <bean name="idphone1" class="org.miage.carnet_contact.model.PhoneNumber">
+        <property name="phoneKind" value="Mobile"/>
+        <property name="phoneNumber" value="0767524311"/>
+        <property name="contact" ref="idContact"/>
+    </bean>
+
+    <bean name="idphone2" class="org.miage.carnet_contact.model.PhoneNumber">
+        <property name="phoneKind" value="Fixe"/>
+        <property name="phoneNumber" value="012345623"/>
+        <property name="contact" ref="idContact"/>
+    </bean>
+
+
+    <bean id="idcontactService"   class="org.miage.carnet_contact.application.service.ContactService"></bean>
+    <bean id="idcontactGroupService"   class="org.miage.carnet_contact.application.service.ContactGroupService"></bean>
+    <bean id="idphoneNumberService"   class="org.miage.carnet_contact.application.service.PhoneNumberService"></bean>
+
+</beans>

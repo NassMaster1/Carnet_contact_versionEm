@@ -14,6 +14,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @Entity
+@NamedQuery(name="Contact.findContactById", query="SELECT c FROM Contact c JOIN FETCH c.phoneNumber  WHERE c.id_contact=:id_contact")
 @NamedQuery(name="Contact.findContactByFirstName", query="SELECT c FROM Contact c WHERE c.firstName=:firstname")
 @NamedQuery(name="Contact.findContactBylastName", query="SELECT c FROM Contact c WHERE c.lastName=:lastName")
 @NamedQuery(name="Contact.findContactByFirstNameAndLastName", query="SELECT c FROM Contact c WHERE c.firstName=:firstname AND c.lastName=:lastname")
@@ -46,7 +47,7 @@ public class Contact {
 
 
     //TODO suppression EAGER
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contact", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contact", cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REMOVE})
     Set<PhoneNumber> phoneNumber = new HashSet<>();
 
 
@@ -55,7 +56,7 @@ public class Contact {
     private Adresse adresse;
 
 
-    @ManyToMany(mappedBy="contacts")
+    @ManyToMany(mappedBy="contacts",cascade = CascadeType.REMOVE)
     private Set<ContactGroup> contactGroups=new HashSet<>();
 
     public Contact( String firstName, String lastName, String email, Adresse adresse) {

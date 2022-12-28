@@ -1,8 +1,9 @@
 package org.miage.carnet_contact.controller;
 
 
-import org.miage.carnet_contact.application.PhoneNumberService;
+import org.miage.carnet_contact.application.service.PhoneNumberService;
 import org.miage.carnet_contact.model.PhoneNumber;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,10 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 @RestController
 @RequestMapping(value = "api/v1/PhoneNumber", produces = MediaType.APPLICATION_JSON_VALUE)
-public record PhoneNumberController(PhoneNumberService phoneNumberService) {
+public class PhoneNumberController {
 
+    @Autowired
+    private  PhoneNumberService phoneNumberService;
 
 
     @PostMapping("AddPhoneNumber/{id_contact}")
