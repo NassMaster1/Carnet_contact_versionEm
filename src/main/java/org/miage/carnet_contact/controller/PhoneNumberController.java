@@ -1,7 +1,7 @@
 package org.miage.carnet_contact.controller;
 
 
-import org.miage.carnet_contact.application.service.PhoneNumberService;
+import org.miage.carnet_contact.application.service.IPhoneNumberService;
 import org.miage.carnet_contact.model.PhoneNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,7 +15,7 @@ import javax.validation.Valid;
 public class PhoneNumberController {
 
     @Autowired
-    private  PhoneNumberService phoneNumberService;
+    private IPhoneNumberService phoneNumberService;
 
 
     @PostMapping("AddPhoneNumber/{id_contact}")

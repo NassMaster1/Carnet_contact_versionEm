@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.miage.carnet_contact.application.dto.DetailContactDTO;
 import org.miage.carnet_contact.model.Contact;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DetailContactMapper {
 
-
-    private final ContactMapper contactMapper;
+    @Autowired
+    private  ContactMapper contactMapper;
 
 
     public Contact mapToDetailContact(DetailContactDTO detailContactDTO){

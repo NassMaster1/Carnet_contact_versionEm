@@ -3,7 +3,7 @@ package org.miage.carnet_contact.application.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.miage.carnet_contact.model.PhoneNumber;
-import org.miage.carnet_contact.repository.DAOPhoneNumber;
+import org.miage.carnet_contact.repository.IDAOPhoneNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PhoneNumberService implements IPhoneNumberService{
 
     @Autowired
-    private  DAOPhoneNumber PhoneNumberRepository;
+    private IDAOPhoneNumber PhoneNumberRepository;
 
 
 

@@ -11,7 +11,7 @@ import org.miage.carnet_contact.exception.ContactGroupNotFoundException;
 import org.miage.carnet_contact.exception.ContactGroupNotFoundExceptoinWithName;
 import org.miage.carnet_contact.exception.ContactNotFoundExceptionWithName;
 import org.miage.carnet_contact.model.ContactGroup;
-import org.miage.carnet_contact.repository.DAOContactGroup;
+import org.miage.carnet_contact.repository.IDAOContactGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,14 +22,14 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ContactGroupService implements IContactGroupService {
 
-    private  DAOContactGroup contactGroupRepository;
+    private IDAOContactGroup contactGroupRepository;
 
     private  ContactGroupMapper contactGroupMapper;
 
     private  ContactMapper contactMapper;
 
     @Autowired
-    public void setContactGroupRepository(DAOContactGroup contactGroupRepository) {
+    public void setContactGroupRepository(IDAOContactGroup contactGroupRepository) {
         this.contactGroupRepository = contactGroupRepository;
     }
 
