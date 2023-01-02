@@ -48,7 +48,7 @@ public class Contact {
 
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contact", cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contact", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     Set<PhoneNumber> phoneNumber = new HashSet<>();
 
 
@@ -119,9 +119,6 @@ public class Contact {
         return phoneNumber;
     }
 
-    public void updateContactPhone(Contact contact) {
-        this.phoneNumber.forEach(phoneNumber1 -> phoneNumber1.setContact(contact));
-    }
 
     public void setPhoneNumber(Set<PhoneNumber> phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -149,4 +146,7 @@ public class Contact {
         set.add(phoneNumber);
         this.phoneNumber=set;
     }
+
+
+
 }

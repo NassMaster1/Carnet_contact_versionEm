@@ -102,4 +102,42 @@ public class DAOPhoneNumber implements IDAOPhoneNumber{
         em.close();
 
     }
+
+    @Override
+    public void updatehoneNumberToContact(Long idContact, Long idPhoneNumber, PhoneNumber phoneNumber) {
+        final String nativeQuery="UPDATE PhoneNumber p SET p.phoneKind=? , p.phoneNumber=? WHERE  id_contact =? AND phone_id=?  ";
+        //1: obtenir une connexion et un EntityManager, en passant par la classe JpaUtil
+        EntityManager em= JPAutile.getEmf().createEntityManager();
+
+        // 2 : Ouverture transaction
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        Contact contact = em.find(Contact.class,idContact);
+
+        if (contact!=null) {
+
+            List<PhoneNumber> listPhone=contact.getPhoneNumber().stream().filter(
+                    phoneNumber1 ->phoneNumber1.getId().equals(idPhoneNumber)).toList();
+            if(!listPhone.isEmpty()) {
+                Query query = em.createNativeQuery(nativeQuery);
+                query.setParameter(1, phoneNumber.getPhoneKind());
+                query.setParameter(2, phoneNumber.getPhoneNumber());
+                query.setParameter(3, idContact);
+                query.setParameter(4, idPhoneNumber);
+                query.executeUpdate();
+            }
+            else {
+                throw new PhoneNumberNotFoundException(idPhoneNumber+" in this contact");
+            }
+
+        } else {
+            throw new ContactNotFoundExceprion(idContact);
+        }
+
+        // 4 : Fermeture transaction
+        tx.commit();
+        // 5 : Fermeture de l'EntityManager et de unité de travail JPA
+        em.close();
+    }
 }

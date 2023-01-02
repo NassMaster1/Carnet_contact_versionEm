@@ -9,4 +9,7 @@ public interface IPhoneNumberService {
 
     @Transactional
     void deletePhoneNumberToContact(Long id_contact, Long id_phoneNumber);
+
+
+    void updatehoneNumberToContact(Long id_contact, Long idPhoneNumber, PhoneNumber phoneNumber);
 }

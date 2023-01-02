@@ -9,7 +9,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @NoArgsConstructor
@@ -80,6 +82,11 @@ public class ContactGroup {
 
         list.add(contact);
         this.contacts=list;
+    }
+
+    public void deleteContactGroup(Contact contact){
+        this.contacts.remove(contact);
+        contact.getContactGroups().remove(this);
     }
 
 }

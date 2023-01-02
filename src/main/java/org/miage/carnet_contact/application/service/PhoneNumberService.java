@@ -41,6 +41,15 @@ public class PhoneNumberService implements IPhoneNumberService{
         log.info("✅ phone number deleted in id_contact {} .", id_contact);
     }
 
+    @Override
+    public void updatehoneNumberToContact(Long id_contact, Long idPhoneNumber, PhoneNumber phoneNumber) {
+        log.info("Try to update phone number to contact with id ", id_contact);
+        //TO DO ADD VALIDATOR
+
+        PhoneNumberRepository.updatehoneNumberToContact(id_contact,idPhoneNumber,phoneNumber);
+
+        log.info("✅ phone number update in id_contact {} .", id_contact);
+    }
 
 
 }

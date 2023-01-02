@@ -238,7 +238,7 @@ public class DAOContact implements IDAOContact {
             //suppression des relations
             contact.getPhoneNumber().forEach(phoneNumber -> phoneNumber.setContact(null));
             contact.setAdresse(null);
-            contact.getContactGroups().forEach(contactGroup -> contactGroup.setContacts(null));
+            contact.getContactGroups().forEach(contactGroup -> contactGroup.deleteContactGroup(contact));
 
             em.remove(contact);
         }else {
@@ -272,8 +272,6 @@ public class DAOContact implements IDAOContact {
             contact.setFirstName(contactModify.getFirstName());
             contact.setLastName(contactModify.getLastName());
             contact.setEmail(contactModify.getEmail());
-            contact.setPhoneNumber(contactModify.getPhoneNumber());
-            contact.updateContactPhone(contact);
             contact.setAdresse(contactModify.getAdresse());
             contact.getAdresse().setContact(contact);
 

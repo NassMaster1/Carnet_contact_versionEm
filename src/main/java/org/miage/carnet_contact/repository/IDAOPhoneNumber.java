@@ -7,4 +7,6 @@ public interface IDAOPhoneNumber {
     void addPhoneNumberToContact(Long id, PhoneNumber phoneNumber);
 
     void DeletePhoneNumberToContact(Long id, Long phoneNumber);
+
+    void updatehoneNumberToContact(Long idContact, Long idPhoneNumber, PhoneNumber phoneNumber);
 }
