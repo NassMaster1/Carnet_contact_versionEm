@@ -28,7 +28,7 @@ public class PhoneNumber {
     private String phoneKind;
 
 
-    @Size(min = 2, max = 20)
+    @Size(min = 8, max = 20)
     @NotBlank
     @Column(name = "phoneNumber")
     private String phoneNumber;

@@ -64,9 +64,10 @@ public class DAOContactGroup implements IDAOContactGroup{
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
+        em.merge(conatctGroup);
 
         // 3 : Persistance Objet/Relationnel : création d'un enregistrement en base
-        em.persist(conatctGroup);
+        //em.persist(conatctGroup);
 
         // 4 : Fermeture transaction
         tx.commit();

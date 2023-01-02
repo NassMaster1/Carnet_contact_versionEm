@@ -36,9 +36,10 @@ public class DAOContact implements IDAOContact {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
+        em.merge(detailContact);
 
         // 3 : Persistance Objet/Relationnel : création d'un enregistrement en base
-        em.persist(detailContact);
+        //em.persist(detailContact);
 
         // 4 : Fermeture transaction
         tx.commit();
@@ -55,7 +56,6 @@ public class DAOContact implements IDAOContact {
         // 2 : Ouverture transaction
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-
 
         // 3 : Persistance Objet/Relationnel : création d'un enregistrement en base
         em.merge(detailContact);
@@ -78,23 +78,22 @@ public class DAOContact implements IDAOContact {
     @Override
     public Optional<Contact>  findcontactById(long id) {
 
+        //1: obtenir une connexion et un EntityManager, en passant par la classe JpaUtil
         EntityManager em=JPAutile.getEmf().createEntityManager();
 
-        TypedQuery<Contact> query = em.createNamedQuery("Contact.findContactById", Contact.class);
-        query.setParameter("id_contact", id);
-        Contact contact;
-        try {
-            contact = query.getSingleResult();
-            } catch (NoResultException e) {
-            throw  new ContactNotFoundExceprion(id);
-        }
+        // 2 : Ouverture transaction
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
 
+        Contact contact=em.find(Contact.class,id);
+
+        // 4 : Fermeture transaction
+        tx.commit();
+        // 5 : Fermeture de l'EntityManager et de unité de travail JPA
         em.close();
 
         return Optional.ofNullable(contact);
     }
-
-
 
     /**
      * Recuperer toutes la liste des contacts
@@ -196,6 +195,27 @@ public class DAOContact implements IDAOContact {
         return Optional.ofNullable(contacts);
     }
 
+
+    /**
+     * Trouver les contacts en utilisant un mot clé
+     * @param keyword
+     * @return  list contact
+     */
+    @Override
+    public Optional<List<Contact>> findContactByKeyWord(String keyword) {
+
+        EntityManager em=JPAutile.getEmf().createEntityManager();
+
+        TypedQuery<Contact> query = em.createNamedQuery("Contact.findContactBykeyWord", Contact.class);
+        query.setParameter("keyword", keyword);
+
+        List<Contact> contacts = query.getResultList();
+
+        em.close();
+
+        return Optional.ofNullable(contacts);
+    }
+
     /**
      * Supprimer un contact en utilisant l'id
      * @param id
@@ -218,6 +238,7 @@ public class DAOContact implements IDAOContact {
             //suppression des relations
             contact.getPhoneNumber().forEach(phoneNumber -> phoneNumber.setContact(null));
             contact.setAdresse(null);
+            contact.getContactGroups().forEach(contactGroup -> contactGroup.setContacts(null));
 
             em.remove(contact);
         }else {
@@ -239,7 +260,6 @@ public class DAOContact implements IDAOContact {
 
     @Override
     public void UpdateContact(Long id, Contact contactModify) {
-
         //1: obtenir une connexion et un EntityManager, en passant par la classe JpaUtil
         EntityManager em=JPAutile.getEmf().createEntityManager();
 
@@ -252,6 +272,10 @@ public class DAOContact implements IDAOContact {
             contact.setFirstName(contactModify.getFirstName());
             contact.setLastName(contactModify.getLastName());
             contact.setEmail(contactModify.getEmail());
+            contact.setPhoneNumber(contactModify.getPhoneNumber());
+            contact.updateContactPhone(contact);
+            contact.setAdresse(contactModify.getAdresse());
+            contact.getAdresse().setContact(contact);
 
         }
         else{
@@ -263,6 +287,5 @@ public class DAOContact implements IDAOContact {
         // 5 : Fermeture de l'EntityManager et de unité de travail JPA
         em.close();
     }
-
 
 }

@@ -105,6 +105,14 @@ public class ContactService  implements IContactService{
                 orElseThrow(() -> new ContactNotFoundExceptionWithName(email));
     }
 
+    @Override
+    public List<ContactDTO> findContactByKeyWord (String keyword){
+
+        return contactRepository.findContactByKeyWord(keyword).
+                map(contactMapper::mapToConttactDTO).
+                orElseThrow(() -> new ContactNotFoundExceptionWithName(keyword));
+    }
+
     @Transactional
     @Override
     public void deleteContact(Long id){
@@ -116,10 +124,10 @@ public class ContactService  implements IContactService{
 
     @Transactional
     @Override
-    public void updateContact(Long id , ContactDTO contactDTO){
+    public void updateContact(Long id , DetailContactDTO detailContactDTO){
 
         log.info("Try to update contact with id {} ...", id);
-        Contact contactModify=contactMapper.mapToConatct(contactDTO);
+        Contact contactModify=detailContactMapper.mapToDetailContact(detailContactDTO);
 
         contactRepository.UpdateContact(id,contactModify);
 

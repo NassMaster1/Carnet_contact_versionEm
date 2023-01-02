@@ -79,6 +79,11 @@ public class ContactController {
         return contactService.findByEmail(email);
     }
 
+    @GetMapping(value = "findbyKeyWord/{keyword}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ContactDTO> findContactByKeyWord ( @PathVariable("keyword") String keyword){
+        return contactService.findContactByKeyWord(keyword);
+    }
+
     @DeleteMapping("/{id_contact}")
     public void deleteContact(@PathVariable("id_contact") Long id) {
         contactService.deleteContact(id);
@@ -86,8 +91,8 @@ public class ContactController {
 
 
     @PutMapping("/{id_contact}")
-    public void updateContact(@PathVariable("id_contact") Long id,@RequestBody @Valid  ContactDTO contact){
-        contactService.updateContact(id,contact);
+    public void updateContact(@PathVariable("id_contact") Long id,@RequestBody @Valid  DetailContactDTO detailContactDTO){
+        contactService.updateContact(id,detailContactDTO);
     }
 
 

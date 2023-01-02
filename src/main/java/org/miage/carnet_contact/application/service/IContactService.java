@@ -27,11 +27,13 @@ public interface IContactService {
 
     List<ContactDTO> findByEmail(String email);
 
+    List<ContactDTO> findContactByKeyWord(String keyword);
+
     @Transactional
     void deleteContact(Long id);
 
+
+
     @Transactional
-    void updateContact(Long id, ContactDTO contactDTO);
-
-
+    void updateContact(Long id, DetailContactDTO detailContactDTO);
 }

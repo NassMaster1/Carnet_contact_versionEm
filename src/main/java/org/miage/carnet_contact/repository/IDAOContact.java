@@ -24,7 +24,9 @@ public interface IDAOContact {
 
      Optional<List<Contact>> findContactByEmail(String email);
 
-     void deleteContact(Long id );
+    Optional<List<Contact>> findContactByKeyWord(String keyword);
+
+    void deleteContact(Long id );
 
      void UpdateContact(Long id, Contact contactModify);
 

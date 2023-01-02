@@ -44,6 +44,7 @@ public class DAOPhoneNumber implements IDAOPhoneNumber{
             if (phoneNumberIsExistInContact) {
                 contact.getPhoneNumber().add(phoneNumber);
                 phoneNumber.setContact(contact);
+                em.merge(phoneNumber);
             } else {
                 throw new PhoneNumberConflitException(phoneNumber.getPhoneNumber() + " in this contact");
             }

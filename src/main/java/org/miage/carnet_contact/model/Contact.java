@@ -14,9 +14,10 @@ import java.util.Set;
 
 @NoArgsConstructor
 @Entity
-@NamedQuery(name="Contact.findContactById", query="SELECT c FROM Contact c JOIN FETCH c.phoneNumber  WHERE c.id_contact=:id_contact")
+//@NamedQuery(name="Contact.findContactById", query="SELECT c FROM Contact c JOIN FETCH c.phoneNumber  WHERE c.id_contact=:id_contact")
 @NamedQuery(name="Contact.findContactByFirstName", query="SELECT c FROM Contact c WHERE c.firstName=:firstname")
 @NamedQuery(name="Contact.findContactBylastName", query="SELECT c FROM Contact c WHERE c.lastName=:lastName")
+@NamedQuery(name="Contact.findContactBykeyWord", query="SELECT c FROM Contact c WHERE c.lastName LIKE :keyword||'%' OR c.firstName LIKE :keyword||'%'")
 @NamedQuery(name="Contact.findContactByFirstNameAndLastName", query="SELECT c FROM Contact c WHERE c.firstName=:firstname AND c.lastName=:lastname")
 @Table(name = "contact")
 public class Contact {
@@ -46,8 +47,8 @@ public class Contact {
     private String email;
 
 
-    //TODO suppression EAGER
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contact", cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REMOVE})
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contact", cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REMOVE})
     Set<PhoneNumber> phoneNumber = new HashSet<>();
 
 
@@ -56,7 +57,7 @@ public class Contact {
     private Adresse adresse;
 
 
-    @ManyToMany(mappedBy="contacts",cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy="contacts")
     private Set<ContactGroup> contactGroups=new HashSet<>();
 
     public Contact( String firstName, String lastName, String email, Adresse adresse) {
@@ -116,6 +117,10 @@ public class Contact {
 
     public Set<PhoneNumber> getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void updateContactPhone(Contact contact) {
+        this.phoneNumber.forEach(phoneNumber1 -> phoneNumber1.setContact(contact));
     }
 
     public void setPhoneNumber(Set<PhoneNumber> phoneNumber) {

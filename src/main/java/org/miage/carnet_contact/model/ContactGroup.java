@@ -30,7 +30,7 @@ public class ContactGroup {
     @Column(name = "name_group")
     private String name_group;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(
             name = "join_contact_group",
             joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "group_id"),
