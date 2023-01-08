@@ -26,4 +26,6 @@ public interface IContactGroupService {
     void updateGroup(Long id_group, ContactGroupDTO groupDTO);
 
     List<ContactDTO> findContactsFromGroup(Long id);
+
+    List<ContactGroupDTO> findContactgroupByKeyWord(String keyword);
 }

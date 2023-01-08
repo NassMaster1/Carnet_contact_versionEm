@@ -50,6 +50,12 @@ public class ContactGroupController {
         return contactGroupService.findContactGroupWithName(nameGroup) ;
     }
 
+    @GetMapping(value = "findbyKeyWord/{keyword}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ContactGroupDTO> findContactByKeyWord ( @PathVariable("keyword") String keyword){
+        return contactGroupService.findContactgroupByKeyWord(keyword);
+    }
+
+
     @PostMapping("/addListContact/{id_contact}/{id_group}")
     public ResponseEntity<CostumeResponse<String>> AddListContactToGroup(@PathVariable("id_contact") Long id_contact,@PathVariable("id_group") Long id_group) {
         contactGroupService.AddContactToGroup(id_contact,id_group);

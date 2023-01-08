@@ -132,4 +132,12 @@ public class ContactGroupService implements IContactGroupService {
                 orElseThrow(() -> new ContactNotFoundExceptionWithName(" all"));
     }
 
+    @Override
+    public List<ContactGroupDTO> findContactgroupByKeyWord(String keyword) {
+
+        return contactGroupRepository.findContactByKeyWord(keyword).
+                map(contactGroupMapper::mapToContactGroupDTO).
+                orElseThrow(() -> new ContactGroupNotFoundExceptoinWithName(keyword));
+    }
+
 }

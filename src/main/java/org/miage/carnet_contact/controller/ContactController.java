@@ -49,7 +49,7 @@ public class ContactController {
 
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ContactDTO> findcontactById (){
+    public List<ContactDTO> findcontactALl (){
         return contactService.findAllContact();
     }
 
@@ -60,7 +60,7 @@ public class ContactController {
     }
 
     @GetMapping(value = "findbyFirstName_LastName/{firstName}/{lastName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ContactDTO> findcontactById (@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName){
+    public List<ContactDTO> findbyFirstName_LastName (@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName){
         return contactService.findByFirstNameAndLastName(firstName,lastName);
     }
 

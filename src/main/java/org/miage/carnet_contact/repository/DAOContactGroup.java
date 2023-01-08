@@ -212,6 +212,20 @@ public class DAOContactGroup implements IDAOContactGroup{
         return Optional.ofNullable(contacts);
     }
 
+    @Override
+    public Optional<List<ContactGroup>> findContactByKeyWord(String keyword) {
+
+        EntityManager em=JPAutile.getEmf().createEntityManager();
+
+        TypedQuery<ContactGroup> query = em.createNamedQuery("ContactGroup.findContactGroupBykeyWord", ContactGroup.class);
+        query.setParameter("keyword", keyword);
+
+        List<ContactGroup> contactGroup = query.getResultList();
+
+        em.close();
+
+        return Optional.ofNullable(contactGroup);
+    }
 
 
 }

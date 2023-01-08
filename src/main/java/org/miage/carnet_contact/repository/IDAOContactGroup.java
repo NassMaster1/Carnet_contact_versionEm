@@ -1,5 +1,6 @@
 package org.miage.carnet_contact.repository;
 
+import io.micrometer.observation.ObservationFilter;
 import org.miage.carnet_contact.model.Contact;
 import org.miage.carnet_contact.model.ContactGroup;
 
@@ -25,4 +26,6 @@ public interface IDAOContactGroup {
     void UpdateContactGroup(Long idGroup, ContactGroup groupModify);
 
     Optional<List<Contact>> findListContactFromGroup(Long id_group);
+
+    Optional<List<ContactGroup>> findContactByKeyWord(String keyword);
 }

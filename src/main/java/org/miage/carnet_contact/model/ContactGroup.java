@@ -14,6 +14,8 @@ import java.util.List;
 
 @NoArgsConstructor
 @NamedQuery(name="ContactGroup.findGroupByNameGroup", query="SELECT c FROM ContactGroup c WHERE c.name_group=:namegroup")
+@NamedQuery(name="ContactGroup.findContactGroupBykeyWord", query="SELECT c FROM ContactGroup c WHERE c.name_group LIKE :keyword||'%'")
+
 @Entity
 @Table(name = "contactGroup")
 @Slf4j
