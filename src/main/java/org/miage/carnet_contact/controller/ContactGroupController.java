@@ -78,5 +78,9 @@ public class ContactGroupController {
     }
 
 
+    @DeleteMapping("/deleteContactInGroup/{id_contact}/{id_group}")
+    public void deleteContactInGroup(@PathVariable("id_contact") Long id_contact,@PathVariable("id_group") Long id_group) {
+        contactGroupService.deleteContactInGroup(id_contact,id_group);
+    }
 
 }

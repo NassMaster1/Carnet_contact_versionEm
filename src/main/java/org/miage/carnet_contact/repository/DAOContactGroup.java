@@ -1,8 +1,6 @@
 package org.miage.carnet_contact.repository;
 
-import org.miage.carnet_contact.exception.ContactGroupConflitException;
-import org.miage.carnet_contact.exception.ContactGroupNotFoundException;
-import org.miage.carnet_contact.exception.ContactNotFoundExceprion;
+import org.miage.carnet_contact.exception.*;
 import org.miage.carnet_contact.model.Contact;
 import org.miage.carnet_contact.model.ContactGroup;
 import org.miage.carnet_contact.util.JPAutile;
@@ -225,6 +223,39 @@ public class DAOContactGroup implements IDAOContactGroup{
         em.close();
 
         return Optional.ofNullable(contactGroup);
+    }
+
+    @Override
+    public void deleteContactInGroup(Long id, Long id_group) {
+        //1: obtenir une connexion et un EntityManager, en passant par la classe JpaUtil
+        EntityManager em= JPAutile.getEmf().createEntityManager();
+
+        // 2 : Ouverture transaction
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        Contact contact = em.find(Contact.class,id);
+
+        if (contact!=null) {
+
+            List<ContactGroup> listGroup=contact.getContactGroups().stream().filter(
+                    group ->group.getGroup_id().equals(id_group)).toList();
+            if(!listGroup.isEmpty()) {
+               listGroup.forEach(contactGroup -> contactGroup.deleteContactGroup(contact));
+            }
+            else {
+                throw new ContactGroupNotFoundExceptoinWithName(id_group+" in this contact");
+            }
+
+        } else {
+            throw new ContactNotFoundExceprion(id);
+        }
+
+        // 4 : Fermeture transaction
+        tx.commit();
+        // 5 : Fermeture de l'EntityManager et de unité de travail JPA
+        em.close();
+
     }
 
 

@@ -140,4 +140,18 @@ public class ContactGroupService implements IContactGroupService {
                 orElseThrow(() -> new ContactGroupNotFoundExceptoinWithName(keyword));
     }
 
+
+    @Transactional
+    @Override
+    public void deleteContactInGroup(Long id_contact, Long id_group) {
+
+        log.info("Try to delete group to contact with id ", id_group);
+        //TO DO ADD VALIDATOR
+
+        contactGroupRepository.deleteContactInGroup(id_contact,id_group);
+
+        log.info("✅ phone group deleted with id  {} .", id_group);
+    }
+
+
 }

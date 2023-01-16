@@ -28,4 +28,6 @@ public interface IDAOContactGroup {
     Optional<List<Contact>> findListContactFromGroup(Long id_group);
 
     Optional<List<ContactGroup>> findContactByKeyWord(String keyword);
+
+    void deleteContactInGroup(Long id, Long id_group);
 }

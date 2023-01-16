@@ -28,4 +28,7 @@ public interface IContactGroupService {
     List<ContactDTO> findContactsFromGroup(Long id);
 
     List<ContactGroupDTO> findContactgroupByKeyWord(String keyword);
+
+    @Transactional
+    void deleteContactInGroup(Long id, Long id_group);
 }
