@@ -4,14 +4,14 @@
 
 ## Pré-requis:
 1. JDK 17
-2. Avoir une base de données MySQL nommée *"carnet_contact "*.
+2. Avoir une base de données MySQL nommée *`carnet_contact`*.
 
 ## Installation
 1. Cloner le projet sur votre machine.
-2. Modifier les lignes 21 et 24 de *"src/main/resources/META-INF/persistence.xml"*, en renseignant ses propres données. <br><br>
+2. Modifier les lignes 21 et 24 de *`src/main/resources/META-INF/persistence.xml`*, en renseignant ses propres données. <br><br>
 
 ## Exécution
-1. Lancer la commande : *mvn clean spring-boot:run*.
+1. Lancer la commande : *`mvn clean spring-boot:run`*.
 2. Cloner le projet [https://github.com/NassMaster1/carnet_contact_front](url), puis suivre les indications se trouvant dans son README. 
 3. Sur un navigateur, aller sur [localhost:4200/accueil](url). <br><br>
 
