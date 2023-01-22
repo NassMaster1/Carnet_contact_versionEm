@@ -19,7 +19,7 @@
 ## **Fonctionnalités réalisées :** <br>
 - Les CRUD pour la gestion des Contacts, ContactsGroups et PhoneNumbers.
 - Lister tous les contacts.
-- Possibilité de récupérer un contact avec un des attributs suivant : firstname ou lastname ou email ou keyword, selon besoin. (3 services différents)
+- Possibilité de récupérer un contact avec un des attributs suivant : firstname ou lastname ou email ou keyword, selon les besoins. (3 services différents)
 - Récupérer un contact avec les deux attributs : firstname et lastname.
 - Ajouter un contact à un groupe de contacts.
 - Lister tous les groupes.
